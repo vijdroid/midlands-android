@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Midlands Riders</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Midlands Riders</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_ride_out">Next ride out...</string>
+    <string name="about_us_title">Who we are</string>
+
+
+    <!--Paragraphs 'About us' -->
+    <string name="about_us_p1">Midlands Riders is the UK’s No:1 Diverse Ride Out Group. We offering fortnightly ride outs for anyone that wishes to join in. We also hold weekly short rides to cafes and places. Midlands Riders started in 2014 and became official January 2015, From winning Matlock Baths Town Back In 2016 With A 4500+ Biker Protest For No Parking Charges To Hundreds Of Rides We Have Held &amp; Attended Over The Years. Midlands Riders group caters from 50cc to any size bike, we cater for L plate riders as well as the big bikes. ANY Age or Gender, Some Riders Even bring there kids along as a pilly’  This is a family community group. </string>
+    <string name="about_us_p2">Each Ride out will have a set of MR Marshalls that will get you to the place we are riding too safely &amp; all together. Most of our Marshalls come with first aid or biker down training. Our Ride outs can vary from beach rides to sight seeing places in and around the UK: all done in the 1 ride day.</string>
+    <string name="about_us_p3">Midlands Riders isn\'t an area, its a name. We have riders from as far north as Scotland, Far East As Lincoln, South As Devon &amp; West As The Coast. We Even Have European &amp; WORLD members. You dont have to attend all our rides to be a member, you can grab a hoody and Rep’ in your area at your towns rides &amp; events. MR Shop: <a href="https://www.midlandsriders.com/shop">www.midlandsriders.com/shop</a></string>
+    <string name="about_us_p4">Want to see where members are and have been? Go to MR places : <a href="https://www.midlandsriders.com/mr-places">www.midlandsriders.com/mr-places </a></string>
+    <string name="about_us_p5">Come Join in Today. With Over 13,500+ Members. </string>
+
+
+    <!--Home  -->
+    <string name="day">Day </string>
+
+    <!-- Lorem ipsum -->
+
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
+</resources>

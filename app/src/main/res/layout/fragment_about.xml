@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mrBackground"
+    android:orientation="vertical"
+    tools:context=".Fragments.AboutFragment">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="Midland's Riders Logo"
+        android:src="@drawable/mr_circular_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/shadowcard"
+        android:text="@string/about_us_title"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/aboutDescP1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p1"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/aboutDescP2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p2"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p3"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p4"
+            android:autoLink="web"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p5"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
