@@ -2,7 +2,7 @@ package com.chris.thomson.midlandsriders.Extensions;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,7 +10,7 @@ import android.view.animation.RotateAnimation;
 
 import com.chris.thomson.midlandsriders.R;
 
-public class LoadingSpinner extends android.support.v7.widget.AppCompatImageView {
+public class LoadingSpinner extends androidx.appcompat.widget.AppCompatImageView {
 
     private static final int ROTATE_ANIMATION_DURATION = 800;
     private static final int IMAGE_RESOURCE_ID = R.drawable.mr_loader2;
