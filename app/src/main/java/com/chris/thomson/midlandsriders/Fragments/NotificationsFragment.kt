@@ -7,28 +7,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chris.thomson.midlandsriders.Adapters.EventViewAdapter
+import com.chris.thomson.midlandsriders.Adapters.NotificationsViewAdapter
 
 import com.chris.thomson.midlandsriders.R
+import kotlinx.android.synthetic.main.fragment_events.*
+import kotlinx.android.synthetic.main.fragment_notifications.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [AboutFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [AboutFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 class NotificationsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    private var mAdapter: NotificationsViewAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +36,18 @@ class NotificationsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifications, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        print("Notifications activity created!")
+        loadStoredNotifications()
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -60,8 +63,6 @@ class NotificationsFragment : Fragment() {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
     }
-
-
 
     override fun onDetach() {
         super.onDetach()
@@ -102,5 +103,14 @@ class NotificationsFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    private fun loadStoredNotifications() {
+        print("Loading stored notifications...")
+        mAdapter = NotificationsViewAdapter()
+        val mLayoutManager = LinearLayoutManager(activity!!)
+        notifications_recycler_view.layoutManager = mLayoutManager
+        notifications_recycler_view.itemAnimator = DefaultItemAnimator()
+        notifications_recycler_view.adapter = mAdapter
     }
 }

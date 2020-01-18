@@ -60,8 +60,6 @@ class EventsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
-
         return inflater.inflate(R.layout.fragment_events, container, false)
     }
 
@@ -94,7 +92,6 @@ class EventsFragment : Fragment() {
         listener = null
     }
 
-
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
@@ -120,7 +117,7 @@ class EventsFragment : Fragment() {
                 }
     }
 
-
+    //Load events from Firestore
     private fun loadEventsList() {
 
         loader!!.showDialog()
