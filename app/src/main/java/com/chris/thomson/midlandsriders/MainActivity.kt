@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         ShopFragment.OnFragmentInteractionListener,
         CalendarFragment.OnFragmentInteractionListener,
         EventsFragment.OnFragmentInteractionListener,
-        AboutFragment.OnFragmentInteractionListener{
+        AboutFragment.OnFragmentInteractionListener,
+        NotificationsFragment.OnFragmentInteractionListener{
 
     private var mStorageRef: StorageReference? = null
 
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(browserIntent)
             }
             R.id.nav_aboutus -> fragmentClass = AboutFragment::class.java
+            R.id.nav_notifications -> fragmentClass = NotificationsFragment::class.java
             else -> fragmentClass = HomeFragment::class.java
         }
 
