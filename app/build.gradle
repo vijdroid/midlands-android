@@ -49,4 +49,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
     implementation 'com.firebaseui:firebase-ui:0.4.4'
 
+    //room
+    def room_version = "2.2.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 }
