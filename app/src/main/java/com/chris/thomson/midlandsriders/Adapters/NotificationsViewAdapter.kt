@@ -43,3 +43,5 @@ class NotificationsViewAdapter()
         }
     }
 }
+
+data class Word(val word: String) {}
