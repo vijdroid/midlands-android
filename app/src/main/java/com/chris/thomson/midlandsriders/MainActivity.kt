@@ -16,7 +16,12 @@ import com.chris.thomson.midlandsriders.Fragments.*
 import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.util.Log
+import android.widget.Toast
 import com.chris.thomson.midlandsriders.TypeFaces.CustomTypefaceSpan
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -57,6 +62,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         setInitialFragment()
+
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(TAG, "getInstanceId failed", task.exception)
+                        return@OnCompleteListener
+                    }
+
+                    // Get new Instance ID token
+                    val token = task.result?.token
+
+                    // Log and toast
+                    val msg = getString(R.string.msg_token_fmt, token)
+                    Log.d(TAG, msg)
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                })
 
 
 
@@ -167,5 +188,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val mNewTitle = SpannableString(mi.title)
         mNewTitle.setSpan(CustomTypefaceSpan("", font), 0, mNewTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         mi.title = mNewTitle
+    }
+
+    companion object {
+
+        private const val TAG = "MainActivity"
     }
 }

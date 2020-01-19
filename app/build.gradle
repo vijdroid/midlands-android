@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui:0.4.4'
 
     //Messaging
-    implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.3'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
     //room
@@ -75,4 +75,5 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+    implementation 'androidx.work:work-runtime:2.2.0'
 }
