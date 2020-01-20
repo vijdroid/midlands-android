@@ -2,6 +2,7 @@ package com.chris.thomson.midlandsriders
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ProgressBar
 
@@ -13,12 +14,21 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Show the splash screen
         setContentView(R.layout.activity_splash)
+
+        Log.d(TAG, "Splash onCreate")
+        val msg = getIntent().toString()
+        Log.d(TAG, msg)
+
         // Start lengthy operation in a background thread
         Thread(Runnable {
             doWork()
             startApp()
             finish()
         }).start()
+    }
+
+    public override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
     }
 
     private fun doWork() {
@@ -39,5 +49,10 @@ class SplashActivity : AppCompatActivity() {
     private fun startApp() {
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    companion object {
+
+        private const val TAG = "SplashActivity"
     }
 }
