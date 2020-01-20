@@ -13,13 +13,41 @@
     <string name="about_us_title">Who we are</string>
 
 
-    <!--Paragraphs 'About us' -->
+    <!--
     <string name="about_us_p1">Midlands Riders is the UK’s No:1 Diverse Ride Out Group. We offering fortnightly ride outs for anyone that wishes to join in. We also hold weekly short rides to cafes and places. Midlands Riders started in 2014 and became official January 2015, From winning Matlock Baths Town Back In 2016 With A 4500+ Biker Protest For No Parking Charges To Hundreds Of Rides We Have Held &amp; Attended Over The Years. Midlands Riders group caters from 50cc to any size bike, we cater for L plate riders as well as the big bikes. ANY Age or Gender, Some Riders Even bring there kids along as a pilly’  This is a family community group. </string>
     <string name="about_us_p2">Each Ride out will have a set of MR Marshalls that will get you to the place we are riding too safely &amp; all together. Most of our Marshalls come with first aid or biker down training. Our Ride outs can vary from beach rides to sight seeing places in and around the UK: all done in the 1 ride day.</string>
     <string name="about_us_p3">Midlands Riders isn\'t an area, its a name. We have riders from as far north as Scotland, Far East As Lincoln, South As Devon &amp; West As The Coast. We Even Have European &amp; WORLD members. You dont have to attend all our rides to be a member, you can grab a hoody and Rep’ in your area at your towns rides &amp; events. MR Shop: <a href="https://www.midlandsriders.com/shop">www.midlandsriders.com/shop</a></string>
     <string name="about_us_p4">Want to see where members are and have been? Go to MR places : <a href="https://www.midlandsriders.com/mr-places">www.midlandsriders.com/mr-places </a></string>
-    <string name="about_us_p5">Come Join in Today. With Over 13,500+ Members. </string>
+    <string name="about_us_p5">Come Join in Today. With Over 13,500+ Members. </string>-->
 
+    <string name="about_us_p1">
+        Midlands Riders: The UK’s Number 1 Diverse Ride Out Group.
+    </string>
+    <string name="about_us_p2">
+        Midlands Riders host fortnightly ride outs for anyone that wishes to join in, dont want to ride alone? Want to ride with other like minded bikers ? Your in the right place ! We also run weekly short rides to cafes and biker nights and this APP should help you join in with thousands of bikers just click the event tab to view !
+    </string>
+    <string name="about_us_p3">
+        We are a Diverse group which is from 50cc to any size bike, we cater for L plate riders as well as the big bikes. ANY Age or Gender, Some Riders Even bring there kids along as a pilly’  - This is a family community group.
+    </string>
+    <string name="about_us_p4">
+        Each Ride out will have MR Marshalls that will get you to the place we are riding too safely and all together. Most of our Marshalls come with first aid or biker down training. Our Ride outs can vary from beach rides to sight seeing places in and around the UK: all done in the 1 ride day.
+    </string>
+    <string name="about_us_p5">
+        Midlands Riders isnt an area, its a name. We have riders from as far north as Scotland, Far East As Lincoln, South As Devon and West As The Coast. We Even Have European and WORLD members. You dont have to attend all our rides to be a member, you can grab a hoody and Rep’ in your area at your towns rides and events. MR Shop: www.midlandsriders.com/shop
+    </string>
+    <string name="about_us_p6">
+        Want to see where members are and have been? Go to MR places : www.midlandsriders.com/mr-places
+
+        Website : www.midlandsriders.com
+
+        Main facebook page : www.facebook.com/midlandsriders
+
+        Whatsapp chat line : 0330 133 1831
+
+        Facebook group with thousands of bikers in that chat everyday : www.facebook.com/groups/midlandsridersofficial
+
+        Come Join in Today With Thousands of other bikers.
+    </string>
 
     <!--Home  -->
     <string name="day">Day </string>

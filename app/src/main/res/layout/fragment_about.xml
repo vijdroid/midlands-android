@@ -83,6 +83,14 @@
             android:text="@string/about_us_p5"
             android:textColor="@android:color/white" />
 
+        <TextView
+            android:id="@+id/aboutDescP6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/shadowcard"
+            android:text="@string/about_us_p6"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
     </ScrollView>
