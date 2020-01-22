@@ -42,6 +42,14 @@ class SplashActivity : AppCompatActivity() {
     private fun checkIntent(intent: Intent?): Boolean {
         if (intent?.extras != null) {
             Log.d(TAG, "Has extras!")
+            val contents = intent!!.extras!!.describeContents()
+            val extras = intent.extras!!
+            val keys = extras.keySet()
+            Log.d(TAG, keys.toString())
+            val iterator = keys.iterator()
+            iterator.forEach {
+                Log.d(TAG, it)
+            }
             return true
         } else {
             Log.d(TAG, "Doesn't have extras")
