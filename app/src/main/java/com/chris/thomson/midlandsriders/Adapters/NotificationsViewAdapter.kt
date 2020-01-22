@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.AndroidViewModel
 //import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import androidx.room.*
 import com.chris.thomson.midlandsriders.EventDetailActivity
 import com.chris.thomson.midlandsriders.R
@@ -19,6 +21,8 @@ import com.chris.thomson.midlandsriders.ViewModels.Event
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.event_item.view.*
+import kotlinx.coroutines.launch
+
 //import kotlinx.coroutines.launch
 
 class NotificationsViewAdapter()
@@ -106,7 +110,7 @@ class WordRepository(private val wordDao: WordDao) {
     }
 }
 
-/*
+// Class extends AndroidViewModel and requires application as a parameter.
 class WordViewModel(application: Application) : AndroidViewModel(application) {
 
     // The ViewModel maintains a reference to the repository to get data.
@@ -129,9 +133,7 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
      * ViewModels have a coroutine scope based on their lifecycle called
      * viewModelScope which we can use here.
      */
-
-    /*
     fun insert(word: Word) = viewModelScope.launch {
         repository.insert(word)
-    }*/
-}*/
+    }
+}

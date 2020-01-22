@@ -80,15 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     // Log and toast
                     val msg = getString(R.string.msg_token_fmt, token)
                     Log.d(TAG, msg)
-                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                 })
-
-
-
-        //val msg = getIntent().toString()
-        //Log.d(TAG, msg)
-
-        //checkIntentForNotifications()
     }
 
     private fun checkIntentForNotifications(): Boolean {
