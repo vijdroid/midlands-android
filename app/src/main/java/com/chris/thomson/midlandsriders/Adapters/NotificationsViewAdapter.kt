@@ -31,24 +31,25 @@ class NotificationsViewAdapter(context: Context?)
     : RecyclerView.Adapter<NotificationsViewAdapter.NotificationViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var words = emptyList<Word>()
+    private var notifications = emptyList<StoredNotification>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val view = inflater.inflate(R.layout.notification_item, parent, false)
         return NotificationViewHolder(view)
     }
 
-    override fun getItemCount() = words.size
+    override fun getItemCount() = notifications.size
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        holder.title.text = "There's a bike race in November!"
+        //holder.title.text = "There's a bike race in November!"
         //holder.body.text = "Everyone is welcome to attend on that day."
-        val current = words[position]
-        holder.body.text = current.word
+        val current = notifications[position]
+        holder.body.text = current.body
+        holder.title.text = current.title
     }
 
-    internal fun setWords(words: List<Word>) {
-        this.words = words
+    internal fun setNotifications(notifications: List<StoredNotification>) {
+        this.notifications = notifications
         notifyDataSetChanged()
     }
 

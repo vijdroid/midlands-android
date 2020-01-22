@@ -12,10 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chris.thomson.midlandsriders.Adapters.EventViewAdapter
-import com.chris.thomson.midlandsriders.Adapters.NotificationsViewAdapter
-import com.chris.thomson.midlandsriders.Adapters.Word
-import com.chris.thomson.midlandsriders.Adapters.WordViewModel
+import com.chris.thomson.midlandsriders.Adapters.*
 
 import com.chris.thomson.midlandsriders.R
 import kotlinx.android.synthetic.main.fragment_events.*
@@ -33,7 +30,7 @@ class NotificationsFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private var mAdapter: NotificationsViewAdapter? = null
-    private lateinit var wordViewModel: WordViewModel
+    private lateinit var notificationsViewModel: StoredNotificationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +40,10 @@ class NotificationsFragment : Fragment() {
         }
 
         mAdapter = NotificationsViewAdapter(context)
-        wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
-        wordViewModel.allWords.observe(this, Observer { words ->
+        notificationsViewModel = ViewModelProviders.of(this).get(StoredNotificationViewModel::class.java)
+        notificationsViewModel.allNotifications.observe(this, Observer { words ->
             // Update the cached copy of the words in the adapter.
-            words?.let { mAdapter!!.setWords(it) }
+            words?.let { mAdapter!!.setNotifications(it) }
         })
     }
 
@@ -58,7 +55,6 @@ class NotificationsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        print("Notifications activity created!")
         loadStoredNotifications()
     }
 
