@@ -9,10 +9,21 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.viewModelScope
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.chris.thomson.midlandsriders.Adapters.StoredNotification
+import com.chris.thomson.midlandsriders.Adapters.StoredNotificationDAO
+import com.chris.thomson.midlandsriders.Adapters.StoredNotificationRepository
+import com.chris.thomson.midlandsriders.Adapters.StoredNotificationRoomDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -47,12 +58,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
+
+            saveNotification("This is TITLE", "This is BODY")
+
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
     // [END receive_message]
+
+    private fun saveNotification(title: String, body: String) {
+        val newNotification = StoredNotification(title, body)
+        val db = Room.databaseBuilder(this, StoredNotificationRoomDatabase::class.java,"word_database").build()
+
+        GlobalScope.launch {
+            db.storedNotificationDao().insert(newNotification)
+        }
+    }
 
 
     // [START on_new_token]

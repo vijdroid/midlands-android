@@ -99,11 +99,11 @@ abstract class StoredNotificationRoomDatabase : RoomDatabase() {
                     var storedNotificationDAO = database.storedNotificationDao()
 
                     // Delete all content here.
-                    storedNotificationDAO.deleteAll()
+                   //storedNotificationDAO.deleteAll()
 
                     // TODO: Add your own words!
-                    var newNot = StoredNotification("Alert from Midlans!", "This is the body.")
-                    storedNotificationDAO.insert(newNot)
+                    //var newNot = StoredNotification("Alert from Midlans!", "This is the body.")
+                    //storedNotificationDAO.insert(newNot)
                 }
             }
         }
