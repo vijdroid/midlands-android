@@ -1,5 +1,6 @@
 package com.chris.thomson.midlandsriders
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    public var showNotifications = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +63,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        Log.d(TAG, "Activity onCreate")
+
         setInitialFragment()
 
         FirebaseInstanceId.getInstance().instanceId
@@ -76,9 +80,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     // Log and toast
                     val msg = getString(R.string.msg_token_fmt, token)
                     Log.d(TAG, msg)
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                 })
 
+
+
+        //val msg = getIntent().toString()
+        //Log.d(TAG, msg)
+
+        //checkIntentForNotifications()
+    }
+
+    private fun checkIntentForNotifications(): Boolean {
+        Log.d(TAG, "Activity checking intent extras...")
+        val intent = getIntent()
+        intent?.extras?.get("showNotifications").let {
+            val show = it as Boolean
+
+
+            if (show) {
+                Log.d(TAG, "SHOW NOTIFICATIONS")
+                return true
+            } else {
+                Log.d(TAG, "NO SHOW!")
+                return false
+            }
+        }
 
     }
 
@@ -168,7 +195,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         var fragment: Fragment? = null
         val fragmentClass: Class<*>
-        fragmentClass = HomeFragment::class.java
+
+
+        if (checkIntentForNotifications()) {
+            Log.d(TAG, "Activity going notify")
+            fragmentClass = NotificationsFragment::class.java
+        } else {
+            Log.d(TAG, "Activity NOT going notify")
+            fragmentClass = HomeFragment::class.java
+        }
+
+
         val fragmentManager = supportFragmentManager
 
         try {

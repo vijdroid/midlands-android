@@ -19,16 +19,12 @@ class SplashActivity : AppCompatActivity() {
         val msg = getIntent().toString()
         Log.d(TAG, msg)
 
-        if (intent?.extras != null) {
-            Log.d(TAG, "Has extras!")
-        } else {
-            Log.d(TAG, "Doesn't have extras")
-        }
+        val shouldShowNotifications = checkIntent(intent)
 
         // Start lengthy operation in a background thread
         Thread(Runnable {
             doWork()
-            startApp()
+            startApp(shouldShowNotifications)
             finish()
         }).start()
     }
@@ -40,12 +36,19 @@ class SplashActivity : AppCompatActivity() {
         val msg = getIntent().toString()
         Log.d(TAG, msg)
 
+        checkIntent(intent)
+    }
+
+    private fun checkIntent(intent: Intent?): Boolean {
         if (intent?.extras != null) {
             Log.d(TAG, "Has extras!")
+            return true
         } else {
             Log.d(TAG, "Doesn't have extras")
+            return false
         }
     }
+
 
     private fun doWork() {
         var progress = 0
@@ -62,8 +65,9 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun startApp() {
+    private fun startApp(showNotifications: Boolean) {
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
+        intent.putExtra("showNotifications", showNotifications)
         startActivity(intent)
     }
 
