@@ -48,9 +48,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "FCM From: ${remoteMessage.from}")
 
+        var title: String? = ""
+        var body: String? = ""
+
         // Check if message contains a data payload.
         remoteMessage.data.isNotEmpty().let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
+
+            title = remoteMessage.data.get("mtitle")
+            body = remoteMessage.data.get("mbody")
 
             handleNow()
         }
@@ -58,9 +64,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
+            Log.d(TAG, "Message Notification Title: ${it.title}")
 
-            saveNotification("This is TITLE", "This is BODY")
+            title = it.title
+            body = it.body
+        }
 
+        if (title != null && body != null) {
+            saveNotification(title!!, body!!)
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
