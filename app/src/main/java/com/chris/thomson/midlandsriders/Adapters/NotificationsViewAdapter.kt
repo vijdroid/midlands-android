@@ -65,6 +65,117 @@ class NotificationsViewAdapter(context: Context?)
 
 
 @Entity
+class StoredNotification(
+        @PrimaryKey @ColumnInfo(name = "title") val title: String,
+        @ColumnInfo(name = "body") val body: String
+)
+
+@Dao
+interface StoredNotificationDAO {
+
+    @Query("SELECT * from storednotification ORDER BY title ASC")
+    fun getAlphabetizedNotifications(): LiveData<List<StoredNotification>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(notification: StoredNotification)
+
+    @Query("DELETE FROM storednotification")
+    suspend fun deleteAll()
+}
+
+@Database(entities = arrayOf(StoredNotification::class), version = 1, exportSchema = false)
+abstract class StoredNotificationRoomDatabase : RoomDatabase() {
+    abstract fun storedNotificationDao(): StoredNotificationDAO
+
+    private class StoredNotificationDatabaseCallback(
+            private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch {
+                    var storedNotificationDAO = database.storedNotificationDao()
+
+                    // Delete all content here.
+                    storedNotificationDAO.deleteAll()
+
+                    // TODO: Add your own words!
+                    var newNot = StoredNotification("Alert from Midlans!", "This is the body.")
+                    storedNotificationDAO.insert(newNot)
+                }
+            }
+        }
+    }
+
+    companion object {
+        @Volatile
+        private var INSTANCE: StoredNotificationRoomDatabase? = null
+
+        fun getDatabase(
+                context: Context,
+                scope: CoroutineScope
+        ): StoredNotificationRoomDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        StoredNotificationRoomDatabase::class.java,
+                        "word_database"
+                )
+                        .addCallback(StoredNotificationDatabaseCallback(scope))
+                        .build()
+                INSTANCE = instance
+                // return instance
+                instance
+            }
+        }
+    }
+}
+
+class StoredNotificationRepository(private val storedNotificationDAO: StoredNotificationDAO) {
+
+    // Room executes all queries on a separate thread.
+    // Observed LiveData will notify the observer when the data has changed.
+    val allNotifications: LiveData<List<StoredNotification>> = storedNotificationDAO.getAlphabetizedNotifications()
+
+    suspend fun insert(newNotification: StoredNotification) {
+        storedNotificationDAO.insert(newNotification)
+    }
+}
+
+// Class extends AndroidViewModel and requires application as a parameter.
+class StoredNotificationViewModel(application: Application) : AndroidViewModel(application) {
+
+    // The ViewModel maintains a reference to the repository to get data.
+    private val repository: StoredNotificationRepository
+    // LiveData gives us updated words when they change.
+    val allNotifications: LiveData<List<StoredNotification>>
+
+    init {
+        // Gets reference to WordDao from WordRoomDatabase to construct
+        // the correct WordRepository.
+        val storedNotificationDao = StoredNotificationRoomDatabase.getDatabase(application, viewModelScope).storedNotificationDao()
+        repository = StoredNotificationRepository(storedNotificationDao)
+        allNotifications = repository.allNotifications
+    }
+
+    /**
+     * The implementation of insert() in the database is completely hidden from the UI.
+     * Room ensures that you're not doing any long running operations on
+     * the main thread, blocking the UI, so we don't need to handle changing Dispatchers.
+     * ViewModels have a coroutine scope based on their lifecycle called
+     * viewModelScope which we can use here.
+     */
+    fun insert(newNotification: StoredNotification) = viewModelScope.launch {
+        repository.insert(newNotification)
+    }
+}
+
+
+
+@Entity
 class Word(
         @PrimaryKey @ColumnInfo(name = "word") val word: String)
 

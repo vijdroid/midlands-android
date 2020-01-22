@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris.thomson.midlandsriders.Adapters.EventViewAdapter
 import com.chris.thomson.midlandsriders.Adapters.NotificationsViewAdapter
+import com.chris.thomson.midlandsriders.Adapters.Word
 import com.chris.thomson.midlandsriders.Adapters.WordViewModel
 
 import com.chris.thomson.midlandsriders.R
@@ -24,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_notifications.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 
 class NotificationsFragment : Fragment() {
     // TODO: Rename and change types of parameters
