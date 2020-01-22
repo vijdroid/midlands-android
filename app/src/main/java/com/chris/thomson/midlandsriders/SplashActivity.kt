@@ -19,6 +19,12 @@ class SplashActivity : AppCompatActivity() {
         val msg = getIntent().toString()
         Log.d(TAG, msg)
 
+        if (intent?.extras != null) {
+            Log.d(TAG, "Has extras!")
+        } else {
+            Log.d(TAG, "Doesn't have extras")
+        }
+
         // Start lengthy operation in a background thread
         Thread(Runnable {
             doWork()
@@ -29,6 +35,16 @@ class SplashActivity : AppCompatActivity() {
 
     public override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+
+        Log.d(TAG, "Splash onNewIntent")
+        val msg = getIntent().toString()
+        Log.d(TAG, msg)
+
+        if (intent?.extras != null) {
+            Log.d(TAG, "Has extras!")
+        } else {
+            Log.d(TAG, "Doesn't have extras")
+        }
     }
 
     private fun doWork() {
