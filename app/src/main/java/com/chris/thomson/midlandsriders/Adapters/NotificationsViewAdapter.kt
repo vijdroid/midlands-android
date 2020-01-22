@@ -15,31 +15,41 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.chris.thomson.midlandsriders.EventDetailActivity
 import com.chris.thomson.midlandsriders.R
 import com.chris.thomson.midlandsriders.ViewModels.Event
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.event_item.view.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 //import kotlinx.coroutines.launch
 
-class NotificationsViewAdapter()
+class NotificationsViewAdapter(context: Context?)
     : RecyclerView.Adapter<NotificationsViewAdapter.NotificationViewHolder>() {
 
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var words = emptyList<Word>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.notification_item, parent, false)
+        val view = inflater.inflate(R.layout.notification_item, parent, false)
         return NotificationViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return 10
-    }
+    override fun getItemCount() = words.size
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.title.text = "There's a bike race in November!"
-        holder.body.text = "Everyone is welcome to attend on that day."
+        //holder.body.text = "Everyone is welcome to attend on that day."
+        val current = words[position]
+        holder.body.text = current.word
+    }
+
+    internal fun setWords(words: List<Word>) {
+        this.words = words
+        notifyDataSetChanged()
     }
 
     inner class NotificationViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
@@ -75,25 +85,54 @@ interface WordDao {
 abstract class WordRoomDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
 
+    private class WordDatabaseCallback(
+            private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch {
+                    var wordDao = database.wordDao()
+
+                    // Delete all content here.
+                    wordDao.deleteAll()
+
+                    // Add sample words.
+                    var word = Word("Hello")
+                    wordDao.insert(word)
+                    word = Word("World!")
+                    wordDao.insert(word)
+
+                    // TODO: Add your own words!
+                    word = Word("TODO!")
+                    wordDao.insert(word)
+                }
+            }
+        }
+    }
+
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
         @Volatile
         private var INSTANCE: WordRoomDatabase? = null
 
-        fun getDatabase(context: Context): WordRoomDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
+        fun getDatabase(
+                context: Context,
+                scope: CoroutineScope
+        ): WordRoomDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,
                         WordRoomDatabase::class.java,
                         "word_database"
-                ).build()
+                )
+                        .addCallback(WordDatabaseCallback(scope))
+                        .build()
                 INSTANCE = instance
-                return instance
+                // return instance
+                instance
             }
         }
     }
@@ -121,7 +160,7 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
     init {
         // Gets reference to WordDao from WordRoomDatabase to construct
         // the correct WordRepository.
-        val wordsDao = WordRoomDatabase.getDatabase(application).wordDao()
+        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
         repository = WordRepository(wordsDao)
         allWords = repository.allWords
     }

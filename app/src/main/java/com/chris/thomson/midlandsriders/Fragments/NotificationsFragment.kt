@@ -7,10 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris.thomson.midlandsriders.Adapters.EventViewAdapter
 import com.chris.thomson.midlandsriders.Adapters.NotificationsViewAdapter
+import com.chris.thomson.midlandsriders.Adapters.WordViewModel
 
 import com.chris.thomson.midlandsriders.R
 import kotlinx.android.synthetic.main.fragment_events.*
@@ -29,6 +33,7 @@ class NotificationsFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private var mAdapter: NotificationsViewAdapter? = null
+    private lateinit var wordViewModel: WordViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,13 @@ class NotificationsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        mAdapter = NotificationsViewAdapter(context)
+        wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
+        wordViewModel.allWords.observe(this, Observer { words ->
+            // Update the cached copy of the words in the adapter.
+            words?.let { mAdapter!!.setWords(it) }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -107,7 +119,7 @@ class NotificationsFragment : Fragment() {
 
     private fun loadStoredNotifications() {
         print("Loading stored notifications...")
-        mAdapter = NotificationsViewAdapter()
+
         val mLayoutManager = LinearLayoutManager(activity!!)
         notifications_recycler_view.layoutManager = mLayoutManager
         notifications_recycler_view.itemAnimator = DefaultItemAnimator()

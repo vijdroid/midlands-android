@@ -19,6 +19,9 @@ import android.text.SpannableString
 import android.graphics.Typeface
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.chris.thomson.midlandsriders.Adapters.Word
+import com.chris.thomson.midlandsriders.Adapters.WordViewModel
 import com.chris.thomson.midlandsriders.TypeFaces.CustomTypefaceSpan
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.OnCompleteListener
@@ -48,8 +51,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         setSupportActionBar(toolbar)
 
@@ -81,6 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val msg = getString(R.string.msg_token_fmt, token)
                     Log.d(TAG, msg)
                 })
+
     }
 
     private fun checkIntentForNotifications(): Boolean {
