@@ -49,7 +49,6 @@ class NotificationsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notifications, container, false)
     }
 
@@ -77,17 +76,6 @@ class NotificationsFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
@@ -114,8 +102,6 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun loadStoredNotifications() {
-        print("Loading stored notifications...")
-
         val mLayoutManager = LinearLayoutManager(activity!!)
         notifications_recycler_view.layoutManager = mLayoutManager
         notifications_recycler_view.itemAnimator = DefaultItemAnimator()

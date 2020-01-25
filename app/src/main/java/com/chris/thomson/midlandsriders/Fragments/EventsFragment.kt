@@ -70,7 +70,6 @@ class EventsFragment : Fragment() {
 
         firestoreDB = FirebaseFirestore.getInstance()
         loadEventsList()
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event

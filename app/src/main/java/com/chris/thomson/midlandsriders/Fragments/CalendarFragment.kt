@@ -9,11 +9,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chris.thomson.midlandsriders.Adapters.CalendarEventsAdapter
+import com.chris.thomson.midlandsriders.Adapters.EventViewAdapter
+import com.chris.thomson.midlandsriders.Adapters.NotificationsViewAdapter
 import com.events.calendar.views.EventsCalendar
 import com.chris.thomson.midlandsriders.Managers.FontsManager
 
 import com.chris.thomson.midlandsriders.R
+import com.chris.thomson.midlandsriders.ViewModels.Event
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import kotlinx.android.synthetic.main.fragment_events.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,20 +30,14 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [CalendarFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [CalendarFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class CalendarFragment : Fragment(), EventsCalendar.Callback {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    private var firestoreDB: FirebaseFirestore? = null
+    private var mAdapter: CalendarEventsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,35 +46,38 @@ class CalendarFragment : Fragment(), EventsCalendar.Callback {
             param2 = it.getString(ARG_PARAM2)
         }
 
-
+        mAdapter = CalendarEventsAdapter(context)
     }
-
     override fun onDayLongPressed(selectedDate: Calendar?) {
         Log.e("LONG", "CLICKED")
     }
 
     override fun onMonthChanged(monthStartDate: Calendar?) {
         Log.e("MON", "CHANGED")
+        Log.d("MON", monthStartDate?.toString())
+        val gc = monthStartDate as GregorianCalendar
+        val month = gc.time.month
+        Log.d("MONTH", month.toString())
+        loadEventsList(month)
     }
 
     override fun onDaySelected(selectedDate: Calendar?) {
         Log.e("SHORT", "CLICKED")
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_calendar, container, false)
-
         return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        //attachAdapter()
         bindCalendar()
-
-
+        firestoreDB = FirebaseFirestore.getInstance()
+        Log.d("CalendarFragment", "showing one calendar...")
     }
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
@@ -93,20 +99,6 @@ class CalendarFragment : Fragment(), EventsCalendar.Callback {
         listener = null
     }
 
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
@@ -132,8 +124,6 @@ class CalendarFragment : Fragment(), EventsCalendar.Callback {
                 }
     }
 
-
-
     fun bindCalendar() {
 
         val today = Calendar.getInstance()
@@ -150,6 +140,7 @@ class CalendarFragment : Fragment(), EventsCalendar.Callback {
         eventsCalendar.setWeekHeaderTypeface(FontsManager.getTypeface(FontsManager.SHADOW_CARD, this.context!!))
         eventsCalendar.setCallback(this)
 
+        /*
         val c = Calendar.getInstance()
         c.add(Calendar.DAY_OF_MONTH, 2)
         eventsCalendar.addEvent(c)
@@ -159,11 +150,51 @@ class CalendarFragment : Fragment(), EventsCalendar.Callback {
         eventsCalendar.addEvent(c)
         c.add(Calendar.DAY_OF_MONTH, 7)
         eventsCalendar.addEvent(c)
-
+*/
 
         val dc = Calendar.getInstance()
         dc.add(Calendar.DAY_OF_MONTH, 2)
 //        eventsCalendar.disableDate(dc)
 //        eventsCalendar.disableDaysInWeek(Calendar.SATURDAY, Calendar.SUNDAY)
+    }
+
+    private fun attachAdapter() {
+        val mLayoutManager = LinearLayoutManager(activity!!)
+        calendar_events_recycler_view.layoutManager = mLayoutManager
+        calendar_events_recycler_view.itemAnimator = DefaultItemAnimator()
+        calendar_events_recycler_view.adapter = mAdapter
+    }
+
+    //Load events from Firestore
+    private fun loadEventsList(selectedMonth: Int) {
+
+        firestoreDB!!.collection("events")
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val eventList = mutableListOf<Event>()
+
+                        for (doc in task.result!!) {
+                            val event = doc.toObject<Event>(Event::class.java)
+                            event.id = doc.id
+
+                            if (event.date?.month == selectedMonth) {
+                                eventList.add(event)
+                            }
+                        }
+
+                        eventList.forEach {
+                            Log.d("EVENT", it.date?.toString())
+                        }
+
+                        mAdapter?.events = eventList
+                        val mLayoutManager = LinearLayoutManager(activity!!)
+                        calendar_events_recycler_view.layoutManager = mLayoutManager
+                        calendar_events_recycler_view.itemAnimator = DefaultItemAnimator()
+                        calendar_events_recycler_view.adapter = mAdapter
+                    } else {
+                        Toast.makeText(context,"Error fetching events", Toast.LENGTH_LONG).show()
+                    }
+                }
     }
 }
