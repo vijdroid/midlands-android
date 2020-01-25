@@ -50,7 +50,14 @@ class SplashActivity : AppCompatActivity() {
             iterator.forEach {
                 Log.d(TAG, it)
             }
-            return true
+
+            //only show notifications if intent has message id
+            if (keys.contains("google.message_id")) {
+                Log.d(TAG, "has message id")
+                return true
+            } else {
+                return false
+            }
         } else {
             Log.d(TAG, "Doesn't have extras")
             return false
