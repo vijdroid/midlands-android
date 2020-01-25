@@ -51,35 +51,34 @@
             android:id="@+id/aboutDescP2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
-            android:text="@string/about_us_p2"
             android:layout_marginBottom="5dp"
+            android:text="@string/about_us_p2"
             android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/aboutDescP3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
-            android:text="@string/about_us_p3"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p3"
             android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/aboutDescP4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
-            android:text="@string/about_us_p4"
-            android:autoLink="web"
             android:layout_marginBottom="5dp"
+            android:autoLink="web"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p4"
             android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/aboutDescP5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
+            android:fontFamily="@font/roboto"
             android:text="@string/about_us_p5"
             android:textColor="@android:color/white" />
 
@@ -87,8 +86,48 @@
             android:id="@+id/aboutDescP6"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
+            android:fontFamily="@font/roboto"
             android:text="@string/about_us_p6"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP7"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p7"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP8"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p8"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP9"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p9"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP10"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p10"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutDescP11"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/about_us_p11"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
