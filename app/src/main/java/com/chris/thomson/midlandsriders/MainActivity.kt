@@ -153,20 +153,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         var fragment: Fragment? = null
-        var fragmentClass: Class<*> = HomeFragment:: class.java
+        var fragmentClass: Class<*>? = HomeFragment:: class.java
 
         when (item.getItemId()) {
             R.id.nav_home -> fragmentClass = HomeFragment::class.java
             R.id.nav_events -> fragmentClass = EventsFragment::class.java
             R.id.nav_calendar -> fragmentClass = CalendarFragment::class.java
             R.id.nav_shop -> {
-
+                fragmentClass = null
                 val browserIntent : Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.midlandsriders.com/shop"))
                 startActivity(browserIntent)
             }
             R.id.nav_aboutus -> fragmentClass = AboutFragment::class.java
             R.id.nav_notifications -> fragmentClass = NotificationsFragment::class.java
             else -> fragmentClass = HomeFragment::class.java
+        }
+
+        //Dont go anywhere if shop is selected
+        if (fragmentClass == null) {
+            Log.d(TAG, "null fragment")
+            drawer_layout.closeDrawer(GravityCompat.START)
+            return true
         }
 
         try {
