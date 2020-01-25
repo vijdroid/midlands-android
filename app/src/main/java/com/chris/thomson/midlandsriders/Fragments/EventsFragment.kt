@@ -134,7 +134,9 @@ class EventsFragment : Fragment() {
                             eventList.add(event)
                         }
 
-                        mAdapter = EventViewAdapter(eventList, activity!!, firestoreDB!!)
+                        val sortedEvents = eventList.sortedBy { it.date } as MutableList<Event>
+
+                        mAdapter = EventViewAdapter(sortedEvents, activity!!, firestoreDB!!)
                         val mLayoutManager = LinearLayoutManager(activity!!)
                         events_recycler_view.layoutManager = mLayoutManager
                         events_recycler_view.itemAnimator = DefaultItemAnimator()
