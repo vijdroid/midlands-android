@@ -43,7 +43,7 @@ class NotificationsFragment : Fragment() {
         notificationsViewModel = ViewModelProviders.of(this).get(StoredNotificationViewModel::class.java)
         notificationsViewModel.allNotifications.observe(this, Observer { words ->
             // Update the cached copy of the words in the adapter.
-            words?.let { mAdapter!!.setNotifications(it) }
+            words?.let { mAdapter!!.setNotifications(it as ArrayList<StoredNotification>) }
         })
     }
 

@@ -1,27 +1,11 @@
 package com.chris.thomson.midlandsriders
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.os.Build
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.viewModelScope
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.chris.thomson.midlandsriders.Adapters.StoredNotification
-import com.chris.thomson.midlandsriders.Adapters.StoredNotificationDAO
-import com.chris.thomson.midlandsriders.Adapters.StoredNotificationRepository
 import com.chris.thomson.midlandsriders.Adapters.StoredNotificationRoomDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

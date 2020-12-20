@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/shadowcard"
+        android:fontFamily="@font/sansation_bold"
         android:text="@string/about_us_title"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
@@ -42,7 +42,7 @@
             android:id="@+id/aboutDescP1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/shadowcard"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p1"
             android:textColor="@android:color/white"
             android:layout_marginBottom="5dp"/>
@@ -52,6 +52,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p2"
             android:textColor="@android:color/white" />
 
@@ -60,7 +61,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p3"
             android:textColor="@android:color/white" />
 
@@ -70,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:autoLink="web"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p4"
             android:textColor="@android:color/white" />
 
@@ -78,7 +79,7 @@
             android:id="@+id/aboutDescP5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p5"
             android:textColor="@android:color/white" />
 
@@ -86,7 +87,7 @@
             android:id="@+id/aboutDescP6"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p6"
             android:textColor="@android:color/white" />
 
@@ -94,7 +95,7 @@
             android:id="@+id/aboutDescP7"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p7"
             android:textColor="@android:color/white" />
 
@@ -102,7 +103,7 @@
             android:id="@+id/aboutDescP8"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p8"
             android:textColor="@android:color/white" />
 
@@ -110,7 +111,7 @@
             android:id="@+id/aboutDescP9"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p9"
             android:textColor="@android:color/white" />
 
@@ -118,7 +119,7 @@
             android:id="@+id/aboutDescP10"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p10"
             android:textColor="@android:color/white" />
 
@@ -126,7 +127,7 @@
             android:id="@+id/aboutDescP11"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/sansation_regular"
             android:text="@string/about_us_p11"
             android:textColor="@android:color/white" />
 
