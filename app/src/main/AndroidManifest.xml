@@ -3,7 +3,7 @@
     package="com.chris.thomson.midlandsriders">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+<uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
     <application
         android:name=".Utils.MyApplication"
         android:allowBackup="true"

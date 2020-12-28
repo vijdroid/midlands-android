@@ -5,8 +5,9 @@ import android.content.SharedPreferences
 
 class AppPreferences {
     companion object {
+        val AUTH = "midlandsriders123!@#"
         var ISLOGIN="islogin"
-        var BASEURL="http://www.assurelive.com"
+        var BASEURL="http://www.assurelive.com/midlands/v1/"
         private val NAME = "MidlandsRiders"
         private val MODE = Context.MODE_PRIVATE
         private lateinit var preferences: SharedPreferences

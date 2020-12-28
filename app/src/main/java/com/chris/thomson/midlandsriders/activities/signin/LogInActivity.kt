@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.chris.thomson.midlandsriders.Helpers.LoaderHelper
 import com.chris.thomson.midlandsriders.R
 import com.chris.thomson.midlandsriders.activities.signin.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LogInActivity : AppCompatActivity(), View.OnClickListener, LogInInterface {
     lateinit var loginPresenter: LoginPresenter
+    private var loader: LoaderHelper? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
@@ -19,6 +21,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener, LogInInterface 
     }
 
     private fun IntiView() {
+
+        loader = LoaderHelper(this)
         loginPresenter = LoginPresenter(this, this)
     }
 
@@ -41,5 +45,14 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener, LogInInterface 
 
     override fun OnError() {
 
+    }
+
+    override fun showLoading() {
+        loader!!.showDialog()
+    }
+
+    override fun hideLoading() {
+
+        loader!!.hideDialog()
     }
 }
