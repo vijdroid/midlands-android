@@ -141,6 +141,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
+        android:onClick="onClick"
         android:id="@+id/tvForgot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

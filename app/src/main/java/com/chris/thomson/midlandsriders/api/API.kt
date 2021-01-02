@@ -12,4 +12,9 @@ interface API {
     fun LogIn(
             @Query("email") email: String,
             @Query("password") password: String): Call<ResponseBody>
+
+    @POST("resetPassword")
+    fun ResetPassword(
+            @Query("email") email: String,
+            @Query("password") password: String): Call<ResponseBody>
 }

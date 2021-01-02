@@ -13,10 +13,14 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.updateprofile.UpdateProfileActivity" />
-        <activity android:name=".activities.resetpassword.ResetPasswordActivity" />
-        <activity android:name=".activities.signin.signup.SignUpActivity" />
-        <activity android:name=".activities.signin.LogInActivity" /> <!-- [START fcm_default_channel] -->
+        <activity android:name=".activities.updateprofile.UpdateProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.resetpassword.ResetPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.signin.signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.signin.LogInActivity"
+            android:screenOrientation="portrait"/> <!-- [START fcm_default_channel] -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="alerts" /> <!-- [END fcm_default_channel] -->

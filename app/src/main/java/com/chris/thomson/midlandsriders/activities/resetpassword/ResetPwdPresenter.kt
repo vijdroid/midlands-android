@@ -1,4 +1,4 @@
-package com.chris.thomson.midlandsriders.activities.signin
+package com.chris.thomson.midlandsriders.activities.resetpassword
 
 import android.content.Context
 import android.text.Html
@@ -15,36 +15,49 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class LoginPresenter(var mContext: Context, var view: LogInInterface) {
-    fun doLogin(etEmail: AppCompatEditText, etPassword: AppCompatEditText) {
+class ResetPwdPresenter(var mContext: Context, var view: ResetPwsInterface) {
+    fun doReset(etEmailReset: AppCompatEditText, etPwdReset: AppCompatEditText, etCpwdReset: AppCompatEditText) {
         if (AppPreferences.isNetworkAvailable(mContext)) {
-            if (etEmail.text.toString().isNullOrEmpty()) {
+
+            if (etEmailReset.text.toString().isNullOrEmpty()) {
                 var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_email)).plus("</font>")
-                etEmail.setError(Html.fromHtml(error))
-                etEmail.requestFocus()
+                etEmailReset.setError(Html.fromHtml(error))
+                etEmailReset.requestFocus()
                 return
             }
-            if (!Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(etEmailReset.text.toString()).matches()) {
                 var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_email_valid)).plus("</font>")
-                etEmail.setError(Html.fromHtml(error))
-                etEmail.requestFocus()
+                etEmailReset.setError(Html.fromHtml(error))
+                etEmailReset.requestFocus()
                 return
             }
-            if (etPassword.text.toString().isNullOrEmpty()) {
+            if (etPwdReset.text.toString().isNullOrEmpty()) {
                 var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_password)).plus("</font>")
-                etPassword.setError(Html.fromHtml(error))
-                etPassword.requestFocus()
+                etPwdReset.setError(Html.fromHtml(error))
+                etPwdReset.requestFocus()
                 return
             }
-            if (etPassword.text.toString().length < 8) {
+            if (etPwdReset.text.toString().length < 8) {
                 var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_password_valid)).plus("</font>")
-                etPassword.setError(Html.fromHtml(error))
-                etPassword.requestFocus()
+                etPwdReset.setError(Html.fromHtml(error))
+                etPwdReset.requestFocus()
+                return
+            }
+            if (etCpwdReset.text.toString().isNullOrEmpty()) {
+                var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_password)).plus("</font>")
+                etCpwdReset.setError(Html.fromHtml(error))
+                etCpwdReset.requestFocus()
+                return
+            }
+            if (!etPwdReset.text.toString().equals(etCpwdReset.text.toString())) {
+                var error: String = "<font color='red'>".plus(mContext.resources.getString(R.string.err_cpassword_valid)).plus("</font>")
+                etCpwdReset.setError(Html.fromHtml(error))
+                etCpwdReset.requestFocus()
                 return
             }
 
             view.showLoading()
-            RetrofitClient.instance.LogIn(etEmail.text.toString(), etPassword.text.toString())
+            RetrofitClient.instance.ResetPassword(etEmailReset.text.toString(), etPwdReset.text.toString())
                     .enqueue(object : Callback<ResponseBody> {
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             view.hideLoading()
@@ -79,6 +92,7 @@ class LoginPresenter(var mContext: Context, var view: LogInInterface) {
 
                         }
                     })
+
         } else {
             showCstomDailog(mContext, mContext.resources.getString(R.string.lbl_no_intetnet), false, "Ok", positiveClick = {
 

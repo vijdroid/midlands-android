@@ -79,4 +79,6 @@
     <string name="err_password">Please provide password</string>
     <string name="err_email_valid">Please enter valid email</string>
     <string name="err_password_valid">Password must be 8 characters</string>
+    <string name="err_cpassword_valid">Password and Confirm password don\'t match</string>
+    <string name="lbl_no_intetnet">Please your network connection</string>
 </resources>

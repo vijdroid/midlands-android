@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.chris.thomson.midlandsriders.Helpers.LoaderHelper
 import com.chris.thomson.midlandsriders.R
+import com.chris.thomson.midlandsriders.activities.resetpassword.ResetPasswordActivity
 import com.chris.thomson.midlandsriders.activities.signin.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -35,8 +36,14 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener, LogInInterface 
             R.id.btnSignIn -> {
                 loginPresenter.doLogin(etEmail, etPassword)
             }
+            R.id.tvForgot->{
+                val intent = Intent(this, ResetPasswordActivity::class.java)
+                startActivity(intent)
+            }
+
         }
     }
+
 
     override fun OnSuccess() {
 
